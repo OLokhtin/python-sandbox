@@ -1,13 +1,16 @@
 import psycopg2
-from config import *
 from psycopg2.extras import DictCursor #Use select data like dict
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 connection = psycopg2.connect(
-    host=host,
-    port=port,
-    database=db_name,
-    user=user,
-    password=password)
+    host=os.getenv('POSTGRES_HOST'),
+    port=os.getenv('POSTGRES_PORT'),
+    database=os.getenv('POSTGRES_DB'),
+    user=os.getenv('POSTGRES_USER'),
+    password=os.getenv('POSTGRES_PASSWORD')
+)
 
 if connection:
     print("Connected to PostgreSQL")
